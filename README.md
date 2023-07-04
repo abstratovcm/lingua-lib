@@ -144,3 +144,31 @@ Este projeto está licenciado sob a licença MIT. Consulte o arquivo [LICENSE](.
 Este é um projeto pessoal desenvolvido e mantido por um único indivíduo. Embora tenha sido feito o melhor esforço para garantir a funcionalidade, pode haver algumas falhas. Se encontrar problemas, sinta-se à vontade para abrir um issue.
 
 Lembre-se de fornecer detalhes suficientes (como erros, versões usadas e etapas para reproduzir o problema) para facilitar a correção do problema.
+
+# ERROR
+```
+09:05:46,588 ERROR [org.jboss.msc.service.fail] (MSC service thread 1-4) MSC000001: Failed to start service jboss.deployment.unit."language-study.war".undertow-deployment.UndertowDeploymentInfoService: org.jboss.msc.service.StartException in service jboss.deployment.unit."language-study.war".undertow-deployment.UndertowDeploymentInfoService: Failed to start service
+	at org.jboss.msc@1.5.0.Final//org.jboss.msc.service.ServiceControllerImpl$StartTask.execute(ServiceControllerImpl.java:1582)
+	at org.jboss.msc@1.5.0.Final//org.jboss.msc.service.ServiceControllerImpl$ControllerTask.run(ServiceControllerImpl.java:1411)
+	at org.jboss.threads@2.4.0.Final//org.jboss.threads.ContextClassLoaderSavingRunnable.run(ContextClassLoaderSavingRunnable.java:35)
+	at org.jboss.threads@2.4.0.Final//org.jboss.threads.EnhancedQueueExecutor.safeRun(EnhancedQueueExecutor.java:1990)
+	at org.jboss.threads@2.4.0.Final//org.jboss.threads.EnhancedQueueExecutor$ThreadBody.doRunTask(EnhancedQueueExecutor.java:1486)
+	at org.jboss.threads@2.4.0.Final//org.jboss.threads.EnhancedQueueExecutor$ThreadBody.run(EnhancedQueueExecutor.java:1363)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.StringIndexOutOfBoundsException: String index out of range: 2
+	at java.base/java.lang.StringLatin1.charAt(StringLatin1.java:47)
+	at java.base/java.lang.String.charAt(String.java:693)
+	at org.wildfly.extension.undertow@28.0.1.Final//org.wildfly.extension.undertow.deployment.UndertowDeploymentInfoService.createServletConfig(UndertowDeploymentInfoService.java:532)
+	at org.wildfly.extension.undertow@28.0.1.Final//org.wildfly.extension.undertow.deployment.UndertowDeploymentInfoService.start(UndertowDeploymentInfoService.java:287)
+	at org.jboss.msc@1.5.0.Final//org.jboss.msc.service.ServiceControllerImpl$StartTask.startService(ServiceControllerImpl.java:1590)
+	at org.jboss.msc@1.5.0.Final//org.jboss.msc.service.ServiceControllerImpl$StartTask.execute(ServiceControllerImpl.java:1553)
+	... 6 more
+
+09:05:46,605 ERROR [org.jboss.as.controller.management-operation] (External Management Request Threads -- 1) WFLYCTL0013: Operation ("add") failed - address: ([("deployment" => "language-study.war")]) - failure description: {"WFLYCTL0080: Failed services" => {"jboss.deployment.unit.\"language-study.war\".undertow-deployment.UndertowDeploymentInfoService" => "Failed to start service
+    Caused by: java.lang.StringIndexOutOfBoundsException: String index out of range: 2"}}
+09:05:46,606 ERROR [org.jboss.as.controller.management-operation] (External Management Request Threads -- 1) WFLYCTL0013: Operation ("add") failed - address: ([("deployment" => "language-study.war")]) - failure description: {"WFLYCTL0080: Failed services" => {"jboss.deployment.unit.\"language-study.war\".undertow-deployment.UndertowDeploymentInfoService" => "Failed to start service
+    Caused by: java.lang.StringIndexOutOfBoundsException: String index out of range: 2"}}
+09:05:46,606 ERROR [org.jboss.as.server] (External Management Request Threads -- 1) WFLYSRV0021: Deploy of deployment "language-study.war" was rolled back with the following failure message: 
+{"WFLYCTL0080: Failed services" => {"jboss.deployment.unit.\"language-study.war\".undertow-deployment.UndertowDeploymentInfoService" => "Failed to start service
+    Caused by: java.lang.StringIndexOutOfBoundsException: String index out of range: 2"}}
+```
