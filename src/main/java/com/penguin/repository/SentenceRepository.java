@@ -15,7 +15,11 @@ public class SentenceRepository {
         try {
             entityManager.persist(sentence);
         } catch (Exception e) {
-            System.out.println(e);
+            // log the error with more details
+            System.err.println("Error occurred when saving the sentence: " + e.getMessage());
+            e.printStackTrace();
+            // propagate the error
+            throw new RuntimeException(e);
         }
     }
 
@@ -23,9 +27,10 @@ public class SentenceRepository {
         try {
             return entityManager.find(Sentence.class, id);
         } catch (Exception e) {
-            System.out.println(e);
+            System.err.println("Error occurred when finding the sentence: " + e.getMessage());
+            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        return null;
     }
 
     public void delete(Long id) {
@@ -35,7 +40,9 @@ public class SentenceRepository {
                 entityManager.remove(sentence);
             }
         } catch (Exception e) {
-            System.out.println(e);
+            System.err.println("Error occurred when deleting the sentence: " + e.getMessage());
+            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -44,9 +51,12 @@ public class SentenceRepository {
             Sentence sentence = find(id);
             if (sentence != null) {
                 sentence.setMandarinSentence(newSentence);
+                entityManager.merge(sentence);
             }
         } catch (Exception e) {
-            System.out.println(e);
+            System.err.println("Error occurred when updating the sentence: " + e.getMessage());
+            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 }

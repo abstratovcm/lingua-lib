@@ -11,19 +11,17 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-
 import jakarta.ejb.EJB;
 
 public class HelloServlet extends HttpServlet {
-    
+
     @EJB
     private SentenceRepository repo;
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws IOException, ServletException
-    {
-        response.setContentType("text/html");
+            throws IOException, ServletException {
+        response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
         if (repo == null) {
             out.println("<h1>Error: repo object is null</h1>");
@@ -35,15 +33,11 @@ public class HelloServlet extends HttpServlet {
             // Inserting a sentence
             sentence = new Sentence("你好，世界");
             repo.save(sentence);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            out.println("<h1>Error: " + ex.getMessage() + "</h1>");
-        }
 
-        try {
             // Fetching a sentence
             Sentence fetchedSentence = repo.find(sentence.getId());
-            out.println("<h1>Id: " + fetchedSentence.getId() + ", Sentence: " + fetchedSentence.getMandarinSentence() + "</h1>");
+            out.println("<h1>Id: " + fetchedSentence.getId() + ", Sentence: " + fetchedSentence.getMandarinSentence()
+                    + "</h1>");
         } catch (Exception ex) {
             ex.printStackTrace();
             out.println("<h1>Error: " + ex.getMessage() + "</h1>");
