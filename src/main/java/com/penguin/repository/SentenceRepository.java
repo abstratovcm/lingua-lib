@@ -2,7 +2,11 @@ package com.penguin.repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.ejb.Stateless;
+
+import java.util.List;
+
 import com.penguin.model.Sentence;
 
 @Stateless
@@ -28,6 +32,18 @@ public class SentenceRepository {
             return entityManager.find(Sentence.class, id);
         } catch (Exception e) {
             System.err.println("Error occurred when finding the sentence: " + e.getMessage());
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Sentence> findAll() {
+        try {
+            CriteriaQuery<Sentence> criteriaQuery = entityManager.getCriteriaBuilder().createQuery(Sentence.class);
+            criteriaQuery.select(criteriaQuery.from(Sentence.class));
+            return entityManager.createQuery(criteriaQuery).getResultList();
+        } catch (Exception e) {
+            System.err.println("Error occurred when finding all sentences: " + e.getMessage());
             e.printStackTrace();
             throw new RuntimeException(e);
         }
