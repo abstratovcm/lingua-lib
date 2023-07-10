@@ -114,21 +114,34 @@ Se a configuração estiver correta, a seguinte mensagem será exibida:
 
 Este projeto usa tanto `Makefile` quanto `pom.xml` para gerenciar o ciclo de vida do aplicativo.
 
-### Usando Maven
+### Configuração do Java
 
-Para compilar o projeto, você pode usar o Maven. Execute o seguinte comando:
+O projeto é configurado para usar a versão 11 do Java, mais especificamente a `/usr/lib/jvm/java-1.11.0-openjdk-amd64`. A versão do Java pode ser alterada no arquivo `config.mk` se você estiver usando uma versão diferente.
 
-~~~bash
-mvn package
+```
+JAVA_HOME := /caminho/para/o/seu/java
+```
+
+### Usando Maven com o Makefile
+
+Além de gerenciar o servidor WildFly, o `Makefile` também foi configurado para trabalhar com o Maven. Qualquer comando do Maven pode ser executado através do `Makefile` ao prefixar o comando com `make mvn`. Por exemplo, para limpar o projeto e construir um pacote, você usaria:
+
 ~~~
-Este comando irá compilar o código e gerar um arquivo .war na pasta target.
+make mvn clean package
+~~~
+
+Esta característica é especialmente útil para garantir que todo o projeto e até o servidor WildFly estejam funcionando com a versão correta do Java, pois isso pode variar entre projetos. Ao usar o `Makefile` para executar comandos do Maven, você pode ter certeza de que está usando a versão correta do Java conforme configurado no `config.mk`.
+
+Isso garante uma maior flexibilidade ao desenvolver vários projetos que podem requerer diferentes versões do Java.
 
 ### Usando Makefile
 
-O projeto também inclui um `Makefile` para gerenciar o servidor WildFly. Aqui estão as tarefas disponíveis:
+Aqui estão as tarefas disponíveis:
 
 - `make start`: Inicia o servidor WildFly
 - `make stop`: Encerra o servidor WildFly
+- `make mvn clean package`: Limpa o diretório do projeto e constrói um pacote
+- `make log`: Monitora e exibe em tempo real o arquivo de log do servidor WildFly
 
 O `Makefile` usa a variável `WILDFLY_DIR` para apontar para o local de instalação do WildFly. Se você instalou o WildFly em um local diferente de `/opt/wildfly-28.0.1.Final`, você precisará atualizar a variável `WILDFLY_DIR` no `config.mk`:
 
