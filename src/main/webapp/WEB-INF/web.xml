@@ -5,11 +5,11 @@
      version="6.0">
   <display-name>Archetype Created Web Application</display-name>
   <servlet>
-    <servlet-name>HelloServlet</servlet-name>
-    <servlet-class>com.penguin.servlet.HelloServlet</servlet-class>
+    <servlet-name>SentenceServlet</servlet-name>
+    <servlet-class>com.penguin.servlet.SentenceServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>HelloServlet</servlet-name>
-    <url-pattern>/hello</url-pattern>
+    <servlet-name>SentenceServlet</servlet-name>
+    <url-pattern>/sentence</url-pattern>
   </servlet-mapping>
 </web-app>

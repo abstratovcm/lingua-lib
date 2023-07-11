@@ -19,7 +19,8 @@
         <h1>Sentences</h1>
         <form id="sentenceForm" action="sentence" method="post" class="form">
             <input type="hidden" id="id" name="id" value="">
-            <input type="text" id="mandarinSentence" name="mandarinSentence" placeholder="Sentence" class="form-control">
+            <input type="text" id="text" name="text" placeholder="Sentence" class="form-control">
+            <input type="text" id="languageName" name="languageName" placeholder="Language" class="form-control">
             <button type="submit" name="action" id="submit" value="add" class="button">Add</button>
         </form>
 
@@ -28,6 +29,7 @@
                 <tr>
                     <th>Id</th>
                     <th>Sentence</th>
+                    <th>Language</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -35,7 +37,8 @@
                 <% for (Sentence sentence : sentences) { %>
                     <tr>
                         <td><%= sentence.getId() %></td>
-                        <td><%= sentence.getMandarinSentence() %></td>
+                        <td><%= sentence.getText() %></td>
+                        <td><%= sentence.getLanguage().getName() %></td>
                         <td class="actions">
                             <div class="edit-wrapper">
                                 <button class="edit button" data-id="<%= sentence.getId() %>">Edit</button>
@@ -57,9 +60,11 @@
 
                 var id = $(this).data("id");
                 var sentence = $(this).closest("tr").find("td:nth-child(2)").text();
+                var language = $(this).closest("tr").find("td:nth-child(3)").text();
 
                 $("#id").val(id);
-                $("#mandarinSentence").val(sentence);
+                $("#text").val(sentence);
+                $("#languageName").val(language);
                 $("#submit").val("update").text("Update");
             });
 

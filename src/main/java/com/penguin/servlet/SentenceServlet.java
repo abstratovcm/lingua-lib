@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import com.penguin.model.Sentence;
 import com.penguin.repository.SentenceRepository;
+import com.penguin.repository.LanguageRepository;
 
 import jakarta.ejb.EJB;
 import java.io.IOException;
@@ -18,25 +19,23 @@ public class SentenceServlet extends HttpServlet {
     @EJB
     private SentenceRepository sentenceRepository;
 
+    @EJB
+    private LanguageRepository languageRepository;
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        // set response content type and character encoding
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
 
-        request.setAttribute("sentences", sentenceRepository.findAll());
+        request.setAttribute("sentences", sentenceRepository.findAllEagerly());
         request.getRequestDispatcher("/sentences.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        // set request character encoding
         response.setContentType("text/html");
         request.setCharacterEncoding("UTF-8");
 
-        // set response content type and character encoding
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
 
@@ -54,14 +53,14 @@ public class SentenceServlet extends HttpServlet {
                 break;
             case "update":
                 Long idUpdate = Long.parseLong(request.getParameter("id"));
-                String mandarinUpdate = request.getParameter("mandarinSentence");
-                sentenceRepository.update(idUpdate, mandarinUpdate);
+                String textUpdate = request.getParameter("text");
+                String languageNameUpdate = request.getParameter("languageName");
+                sentenceRepository.update(idUpdate, textUpdate, languageNameUpdate);
                 break;
             default:
-                String mandarinAdd = request.getParameter("mandarinSentence");
-                Sentence sentenceToAdd = new Sentence();
-                sentenceToAdd.setMandarinSentence(mandarinAdd);
-                sentenceRepository.save(sentenceToAdd);
+                String textAdd = request.getParameter("text");
+                String languageNameAdd = request.getParameter("languageName");
+                sentenceRepository.save(new Sentence(textAdd), languageNameAdd);
                 break;
         }
 
