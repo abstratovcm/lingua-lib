@@ -27,14 +27,6 @@ public class SentenceRepository {
     @EJB
     private LanguageRepository languageRepository;
 
-    //public SentenceRepository(LanguageRepository languageRepository) {
-    //    this.languageRepository = languageRepository;
-    //}
-//
-    //public SentenceRepository() {
-    //    
-    //}
-
     public void save(Sentence sentence, String languageName) {
         try {
             if (sentence == null || languageName == null || languageName.isEmpty()) {
