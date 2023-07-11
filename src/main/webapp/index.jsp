@@ -12,6 +12,8 @@
     <div class="container">
         <h1>Welcome to our language study website!</h1>
         <p><a href="sentence" class="button">Go to Sentences</a></p>
+        <p><a href="language" class="button">Go to Languages</a></p>
+        <p><a href="translation" class="button">Go to Translations</a></p>
     </div>
 </body>
 </html>

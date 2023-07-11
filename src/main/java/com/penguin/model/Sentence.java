@@ -10,14 +10,18 @@ public class Sentence {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "mandarin_sentence")
-    private String mandarinSentence;
+    @Column(name = "text")
+    private String text;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "language_id")
+    private Language language;
 
     public Sentence() {
     }
 
-    public Sentence(String mandarinSentence) {
-        this.mandarinSentence = mandarinSentence;
+    public Sentence(String text) {
+        this.text = text;
     }
 
     public Long getId() {
@@ -28,12 +32,19 @@ public class Sentence {
         this.id = id;
     }
 
-    public String getMandarinSentence() {
-        return mandarinSentence;
+    public String getText() {
+        return text;
     }
 
-    public void setMandarinSentence(String mandarinSentence) {
-        this.mandarinSentence = mandarinSentence;
+    public void setText(String text) {
+        this.text = text;
     }
 
+    public Language getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
+    }
 }
