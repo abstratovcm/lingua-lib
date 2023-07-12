@@ -4,12 +4,22 @@
      xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
      version="6.0">
   <display-name>Archetype Created Web Application</display-name>
-  <servlet>
-    <servlet-name>SentenceServlet</servlet-name>
-    <servlet-class>com.penguin.servlet.SentenceServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>SentenceServlet</servlet-name>
-    <url-pattern>/sentence</url-pattern>
-  </servlet-mapping>
+
+  <filter>
+    <filter-name>ShiroFilter</filter-name>
+    <filter-class>org.apache.shiro.web.servlet.ShiroFilter</filter-class>
+    <init-param>
+      <param-name>configPath</param-name>
+      <param-value>classpath:shiro.ini</param-value>
+    </init-param>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>ShiroFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+    <dispatcher>ERROR</dispatcher>
+  </filter-mapping>
 </web-app>
